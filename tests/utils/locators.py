@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.ui import Select
 
 
 class Locators:
@@ -78,3 +79,15 @@ class Locators:
     def withinElement_get(self, parentElement: WebElement, childElement: str):
         # Buscar un element específico dentro de un elemento padre
         return parentElement.find_element(By.CSS_SELECTOR, childElement)
+
+    def select_by_value(self, element: WebElement, value: str):
+        select = Select(element)
+        select.select_by_value(value)
+        return select
+    
+    
+
+        
+        
+    
+   
