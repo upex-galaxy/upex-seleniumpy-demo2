@@ -10,8 +10,8 @@ class TestSuite:
         get = Locators(web)
 
         get.page("https://demoqa.com/select-menu")
-        # title = web.title
-        # assert title == "Select Menu"
+        title = web.title
+        assert title == "DEMOQA"
 
         yield
         web.quit()
