@@ -18,12 +18,9 @@ class TestSuite:
         
     def test_TC1_click_buttons(self, precondition):
         get.bySelector('.custom-control-label[for="yesRadio"').click()
-        time.sleep(3)
         get.bySelector('.custom-control-label[for="impressiveRadio"]').click()
-        time.sleep(3)
         rb=get.bySelector('#noRadio')
         assert not rb.is_enabled(), "rb is enabled, which is expected"
-        time.sleep(3)
     
 
 if __name__ == '__main__':
