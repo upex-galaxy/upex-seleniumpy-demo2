@@ -27,12 +27,12 @@ class Test_GX3_116_Button:
     def test_TC02_right_clickme(self, precondition):
         rc_button = get.bySelector('#rightClickBtn')
         get.right_click_command(rc_button)
-        get.scroll_down
+        get.scroll_down_200pixels
         assert get.wait_until_visible_by_text('You have done a right click')
      
     def test_TC03_clickme_dymanic(self, precondition):
         get.byXpath("(//button[contains(@class, 'btn-primary') and contains(text(), 'Click Me')])[3]").click()
-        get.scroll_down
+        get.scroll_down_200pixels
         assert get.wait_until_visible_by_text('You have done a dynamic click')
        
        

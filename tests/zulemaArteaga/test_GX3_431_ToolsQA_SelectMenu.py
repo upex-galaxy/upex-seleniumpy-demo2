@@ -1,6 +1,6 @@
 from tests.testbase import *
 
-class TestSuite:
+class Test_GX3_431_ToolsQA_SelectMenu:
     @pytest.fixture
     def precondition(self, setWebDriver: WebDriver):
         global web, get
