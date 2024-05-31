@@ -73,11 +73,12 @@ def setup(setWebDriver: WebDriver):
     # la forma más prolija que te puedo enseñar!
     # todo: Se obtiene la URL de Google y se verifica el título
     web.implicitly_wait(10)
-    get.page("https://google.com")
+    web.maximize_window()
+    # get.page("https://google.com")
 
-    # todo:  Se verifica el título de la página
-    title = web.title
-    assert title == "Google"
+    # # todo:  Se verifica el título de la página
+    # title = web.title
+    # assert title == "Google"
 
     # * Fin de la Precondición.
     # todo: Aquí puedes colocar el código que quieres retornar del setup.
