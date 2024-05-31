@@ -1,7 +1,12 @@
+from tests.testbase import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 
 class Locators:
@@ -79,11 +84,46 @@ class Locators:
     def withinElement_get(self, parentElement: WebElement, childElement: str):
         # Buscar un element específico dentro de un elemento padre
         return parentElement.find_element(By.CSS_SELECTOR, childElement)
-
+    
     def select_by_value(self, element: WebElement, value: str):
         select = Select(element)
         select.select_by_value(value)
         return select
+    
+    def double_click_command(self, element):
+        action = ActionChains(self.web)
+        action.double_click(element).perform()
+        
+    def right_click_command(self, element):
+        action = ActionChains(self.web)
+        action.context_click(element).perform()
+        
+    def wait_until_visible_by_text(self, text: str, timeout=10):
+        # Esperar hasta que el texto este visible.
+        try:
+            WebDriverWait(self.web, timeout).until(
+                    EC.presence_of_element_located((By.XPATH, f'//*[contains(text(),"{text}")]'))
+                ) 
+            return True
+        except TimeoutException:
+            return False
+        
+    def wait_until_element_clickable(self, text: str, timeout=10):
+        # Esperar hasta que se pueda hacer click al elemento
+        WebDriverWait(self.web, timeout).until(
+                    EC.element_to_be_clickable((By.XPATH, f'//*[contains(text(),"{text}")]'))
+                ) 
+        
+    def scroll_down_200pixels(self):
+        self.web.execute_script("window.scrollBy(0, {})".format(200))
+
+    def scroll_down_300pixels(self):
+        self.web.execute_script("window.scrollBy(0, {})".format(300))
+    
+    def scroll_down_400pixels(self):
+        self.web.execute_script("window.scrollBy(0, {})".format(400))
+    
+
     
     
 
