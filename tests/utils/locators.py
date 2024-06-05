@@ -2,9 +2,9 @@ from tests.testbase import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
@@ -77,19 +77,14 @@ class Locators:
 
     # * ---- Smart Locators
 
-    def contains(self, text: str):
-        # Buscar element por dado innerText como contenedor (no estricto)
+    def containsAll(self, text: str):
+        # Buscar todos los elementos que contengan dado innerText como contenedor (no estricto)
         return self.web.find_elements(By.XPATH, f'//*[contains(text(),"{text}")]')
+
+    def contains(self, text: str):
+        # Buscar el primer elemento único que contenga dado innerText como contenedor (no estricto)
+        return self.web.find_element(By.XPATH, f'//*[contains(text(),"{text}")]')
 
     def withinElement_get(self, parentElement: WebElement, childElement: str):
         # Buscar un element específico dentro de un elemento padre
         return parentElement.find_element(By.CSS_SELECTOR, childElement)
-
-
-    
-    
-
-        
-        
-    
-   
