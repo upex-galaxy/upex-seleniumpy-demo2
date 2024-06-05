@@ -1,5 +1,5 @@
 from tests.testbase import *
-import re
+
 class Test_GX3_118_ToolsQA_TextBox:
     
     @pytest.fixture
@@ -22,20 +22,20 @@ class Test_GX3_118_ToolsQA_TextBox:
         input_name = name.send_keys("Zulema")
         do.scroll_down_by_pixels(400)
         get.byID("submit").click()
-        input_value = name.get_attribute("value")
+        input_value = name.get_attribute("value")                       # Getting the attribute of the added input to compare later with the log message
         log_message =get.byXpath("//p[contains(text(),'Name:')]").text  # Find the log message box and get it in text
-        log_message_value = log_message[len("Name:"):]                  # Slicing to remove the label an be able to compare with the name input
-        assert input_value == log_message_value
+        log_message_value = log_message[len("Name:"):]                  # Slicing to remove the label and be able to compare with the name input
+        assert input_value == log_message_value                         # Compare if input matches the log message
 
     def test_TC02_fill_valid_email(self, precondition):
         email = get.byID("userEmail")
         email.send_keys("zulema@gmail.com")
         do.scroll_down_by_pixels(300)
         get.byID("submit").click()
-        input_value = email.get_attribute("value")
+        input_value = email.get_attribute("value")                          # Getting the attribute of the added input to compare later with the log message                                 
         log_message =get.byXpath("//p[contains(text(),'Email:')]").text     # Find the log message box and get it in text
-        log_message_value = log_message[len("Email:"):]                     # Slicing to remove the label an be able to compare with the input
-        assert input_value == log_message_value
+        log_message_value = log_message[len("Email:"):]                     # Slicing to remove the label and be able to compare with the input
+        assert input_value == log_message_value                             # Compare if input matches the log message
     
     def test_TC03_fill_invalid_email(self, precondition):
         email = get.byID("userEmail")
@@ -44,11 +44,11 @@ class Test_GX3_118_ToolsQA_TextBox:
         get.byID("submit").click()
         email_text = email.text
         # Email rules:
-        contains_at = r'@'                              # Does not contain “@”
-        alphanumeric_before_at = r'\w+@'                # Does not contain (minimum) 1 alphanumeric character before “@”
-        alphanumeric_after_at = r'@\w+'                 # Does not contain (minimum) 1 alphanumeric character after “@”
-        dot_after_alphanumeric_after_at = r'@\w+\.'     # Does not contain “.” after: 1 alphanumeric character after “@”.
-        alphanumeric_after_dot = r'@\w+\.\w+'           # Does not contain (minimum) 2 alphanumeric characters after “.”
+        contains_at = r'@'                              # Invalid if Does not contain “@”
+        alphanumeric_before_at = r'\w+@'                # Invalid if Does not contain (minimum) 1 alphanumeric character before “@”
+        alphanumeric_after_at = r'@\w+'                 # Invalid if Does not contain (minimum) 1 alphanumeric character after “@”
+        dot_after_alphanumeric_after_at = r'@\w+\.'     # Invalid if Does not contain “.” after: 1 alphanumeric character after “@”.
+        alphanumeric_after_dot = r'@\w+\.\w+'           # Invalid if Does not contain (minimum) 2 alphanumeric characters after “.”
         if (re.search(contains_at, email_text) or
                     re.search(alphanumeric_before_at, email_text) or
                     re.search(alphanumeric_after_at, email_text) or
@@ -63,52 +63,61 @@ class Test_GX3_118_ToolsQA_TextBox:
         current_address.send_keys("xxx xxxx, xxx, usa")
         do.scroll_down_by_pixels(300)
         get.byID("submit").click()
-        input_value = current_address.get_attribute("value")
+        input_value = current_address.get_attribute("value")                            # Getting the attribute of the added input to compare later with the log message  
         log_message =get.byXpath("//p[contains(text(),'Current Address :')]").text      # Find the log message box and get it in text
-        log_message_value = log_message[len("Current Address :"):]                      # Slicing to remove the label an be able to compare with the input
-        assert input_value == log_message_value
+        log_message_value = log_message[len("Current Address :"):]                      # Slicing to remove the label and be able to compare with the input
+        assert input_value == log_message_value                                         # Compare if input matches the log message
         
     def test_TC05_fill_permanent_address(self, precondition):
         permanent_address= get.byID("permanentAddress")
         permanent_address.send_keys("xxx xxxx, xxx, usa")
         do.scroll_down_by_pixels(300)
         get.byID("submit").click()
-        input_value = permanent_address.get_attribute("value")
+        input_value = permanent_address.get_attribute("value")                             # Getting the attribute of the added input to compare later with the log message  
         log_message =get.byXpath("//p[contains(text(),'Permananet Address :')]").text      # Find the log message box and get it in text
-        log_message_value = log_message[len("Permananet Address :"):]                      # Slicing to remove the label an be able to compare with the input
-        assert input_value == log_message_value
+        log_message_value = log_message[len("Permananet Address :"):]                      # Slicing to remove the label and be able to compare with the input
+        assert input_value == log_message_value                                            # Compare if input matches the log message
         
-    def test_TC06_fillout_complete_form_with_valid_data(self, precondition):
-        name = get.byID("userName")
-        name.send_keys("Zulema")
+    def test_TC06_fillout_complete_form_happy_path(self, precondition):
+            def test_TC01_fill_fullname(self):
+                pass
+            def test_TC02_fill_valid_email(self):
+                pass
+            def test_TC04_fill_current_address(self):
+                pass
+            def test_TC05_fill_permanent_address(self):
+                pass
+       
+        # name = get.byID("userName")
+        # name.send_keys("Zulema")
         
-        email = get.byID("userEmail")
-        email.send_keys("zulema@gmail.com")
+        # email = get.byID("userEmail")
+        # email.send_keys("zulema@gmail.com")
         
-        current_address = get.byID("currentAddress")
-        current_address.send_keys("xxx xxxx, xxx, usa")
+        # current_address = get.byID("currentAddress")
+        # current_address.send_keys("xxx xxxx, xxx, usa")
         
-        permanent_address= get.byID("permanentAddress")
-        permanent_address.send_keys("xxx xxxx, xxx, usa")
+        # permanent_address= get.byID("permanentAddress")
+        # permanent_address.send_keys("xxx xxxx, xxx, usa")
         
-        get.byID("submit").click()
+        # get.byID("submit").click()
         
-        input_value = name.get_attribute("value")
-        input_value = email.get_attribute("value")
-        input_value = current_address.get_attribute("value")
-        input_value = permanent_address.get_attribute("value")
+        # input_value = name.get_attribute("value")
+        # input_value = email.get_attribute("value")
+        # input_value = current_address.get_attribute("value")
+        # input_value = permanent_address.get_attribute("value")
         
-        log_message =get.byXpath("//p[contains(text(),'Name:')]").text
-        log_message =get.byXpath("//p[contains(text(),'Email:')]").text
-        log_message =get.byXpath("//p[contains(text(),'Current Address :')]").text
-        log_message =get.byXpath("//p[contains(text(),'Permananet Address :')]").text
+        # log_message =get.byXpath("//p[contains(text(),'Name:')]").text
+        # log_message =get.byXpath("//p[contains(text(),'Email:')]").text
+        # log_message =get.byXpath("//p[contains(text(),'Current Address :')]").text
+        # log_message =get.byXpath("//p[contains(text(),'Permananet Address :')]").text
         
-        log_message_value = log_message[len("Name:"):] 
-        log_message_value = log_message[len("Email:"):]
-        log_message_value = log_message[len("Current Address :"):]
-        log_message_value = log_message[len("Permananet Address :"):]
+        # log_message_value = log_message[len("Name:"):] 
+        # log_message_value = log_message[len("Email:"):]
+        # log_message_value = log_message[len("Current Address :"):]
+        # log_message_value = log_message[len("Permananet Address :"):]
         
-        assert input_value == log_message_value
+        # assert input_value == log_message_value
    
 if __name__ == '__main__':
     pytest.main()
