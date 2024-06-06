@@ -1,5 +1,6 @@
 # -----
 # * aquí se instancia todos los WebDrivers que se necesiten
+import time
 import pytest
 import sys
 import os
@@ -66,6 +67,13 @@ class Drivers:
             chrome = webdriver.Chrome(service=ChromiumService(
                 ChromeDriverManager().install()), options=execution)
             original_window = chrome.current_window_handle
+            # Espera hasta que haya 2 ventanas abiertas:
+            start_time = time.time()  # Tiempo de inicio
+            timeout = 20  # Tiempo máximo de espera en segundos
+
+            while len(chrome.window_handles) < 2 and (time.time() - start_time) < timeout:
+                print("Waiting for adblock installation...")
+                time.sleep(3)  # Espera un segundo antes de volver a verificar
             windows = chrome.window_handles
             chrome.switch_to.window(windows[1])
             chrome.close()
