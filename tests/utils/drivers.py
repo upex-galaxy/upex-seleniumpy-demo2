@@ -53,15 +53,10 @@ class Drivers:
             fileExists = os.path.exists(path_to_extension)
             if not fileExists:
                 raise FileNotFoundError("The specified file does not exist.")
-            execution.add_argument("--headless")
+            execution.add_argument("--headless=new")
             execution.add_extension(path_to_extension)
             chrome = webdriver.Chrome(service=ChromiumService(
                 ChromeDriverManager().install()), options=execution)
-            original_window = chrome.current_window_handle
-            windows = chrome.window_handles
-            chrome.switch_to.window(windows[1])
-            chrome.close()
-            chrome.switch_to.window(original_window)
             return chrome
         else:
             fileExists = os.path.exists(path_to_extension)

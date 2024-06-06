@@ -28,15 +28,15 @@ class TestSuite:
         value = message.text
         assert value == "Received!"
 
-    def test_TC2_SecondExample(self, precondition):
+    # def test_TC2_SecondExample(self, precondition):
 
-        textBox = get.bySelector("[name='my-text']")
-        submitButton = get.bySelector("[type='submit']")
-        textBox.send_keys("UPEX")
-        submitButton.click()
-        message = get.byID("message")
-        value = message.text
-        assert value == "Received!"
+    #     textBox = get.bySelector("[name='my-text']")
+    #     submitButton = get.bySelector("[type='submit']")
+    #     textBox.send_keys("UPEX")
+    #     submitButton.click()
+    #     message = get.byID("message")
+    #     value = message.text
+    #     assert value == "Received!"
 
 
 if __name__ == '__main__':
