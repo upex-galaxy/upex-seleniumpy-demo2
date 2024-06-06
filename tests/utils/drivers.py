@@ -34,9 +34,13 @@ class Drivers:
 
     def chromeDriver(self):
         # *  Se crea una instancia del Chrome
+        pathToExtension = "path/to/extension"  # ! TODO: add extension
         if self.isHeadless == True:
             execution = ChromeOpt()
             execution.add_argument("--headless")
+            execution.add_argument(
+                f"--disable-extensions-except={pathToExtension}")
+            execution.add_argument(f"--load-extension=${pathToExtension}")
             return webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()), options=execution)
         else:
             return webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()))
