@@ -13,7 +13,6 @@ class Test_GX3_431_ToolsQA_SelectMenu:
         title = web.title
         assert title == "DEMOQA"
 
-
         yield
         web.quit()
     
