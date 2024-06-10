@@ -1,7 +1,9 @@
 # -----
 # * aquí se instancia todos los WebDrivers que se necesiten
+import time
 import pytest
 import sys
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromiumService
 from selenium.webdriver.chrome.options import Options as ChromeOpt
@@ -12,6 +14,19 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.firefox.options import Options as FirefoxOpt
 from webdriver_manager.firefox import GeckoDriverManager
+
+# Obtener la ruta absoluta del archivo actual
+__filename = os.path.abspath(__file__)
+
+# Navegar hacia atrás hasta la raíz del repositorio
+__rootdir = os.path.join(os.path.dirname(__filename), '..', '..')
+
+# Normalizar la ruta para resolver cualquier '..'
+__rootdir = os.path.normpath(__rootdir)
+
+# Combinar la ruta de la raíz del repositorio con el directorio específico
+path_to_extension = os.path.join(
+    __rootdir, 'extension/adblock.crx')
 
 
 def pytest_addoption(parser: pytest.Parser):
@@ -34,12 +49,36 @@ class Drivers:
 
     def chromeDriver(self):
         # *  Se crea una instancia del Chrome
+        execution = ChromeOpt()
         if self.isHeadless == True:
-            execution = ChromeOpt()
-            execution.add_argument("--headless")
-            return webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()), options=execution)
+            fileExists = os.path.exists(path_to_extension)
+            if not fileExists:
+                raise FileNotFoundError("The specified file does not exist.")
+            execution.add_argument("--headless=new")
+            execution.add_extension(path_to_extension)
+            chrome = webdriver.Chrome(service=ChromiumService(
+                ChromeDriverManager().install()), options=execution)
+            return chrome
         else:
-            return webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()))
+            fileExists = os.path.exists(path_to_extension)
+            if not fileExists:
+                raise FileNotFoundError("The specified file does not exist.")
+            execution.add_extension(path_to_extension)
+            chrome = webdriver.Chrome(service=ChromiumService(
+                ChromeDriverManager().install()), options=execution)
+            original_window = chrome.current_window_handle
+            # Espera hasta que haya 2 ventanas abiertas:
+            start_time = time.time()  # Tiempo de inicio
+            timeout = 20  # Tiempo máximo de espera en segundos
+
+            while len(chrome.window_handles) < 2 and (time.time() - start_time) < timeout:
+                print("Waiting for adblock installation...")
+                time.sleep(3)  # Espera un segundo antes de volver a verificar
+            windows = chrome.window_handles
+            chrome.switch_to.window(windows[1])
+            chrome.close()
+            chrome.switch_to.window(original_window)
+            return chrome
 
     def edgeDriver(self):
         # *  Se crea una instancia del Microsoft Edge
