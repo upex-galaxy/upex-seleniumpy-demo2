@@ -9,7 +9,6 @@ class Test_GX3_431_ToolsQA_SelectMenu:
         get = Locators(web)
         do = Actions_to_execute(web)
         
-        
         get.page("https://demoqa.com/select-menu")
         title = web.title
         assert title == "DEMOQA"
