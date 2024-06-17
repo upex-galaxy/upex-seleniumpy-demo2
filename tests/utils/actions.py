@@ -2,7 +2,9 @@ from tests.testbase import *
 
 class Actions_to_execute:
     def __init__(self, driver: WebDriver):
+        global web, get
         self.web = driver
+        get = Locators(self.web)
         
     def select_by_value(self, element: WebElement, value: str):
         select = Select(element)
@@ -33,5 +35,27 @@ class Actions_to_execute:
         
     def scroll_down_by_pixels(self, pixels):
         self.web.execute_script("window.scrollBy(0, {})".format(pixels))
+           
+    def get_table_data(self, ordered_by=None):
+        rows = get.bySelectors('div[class="rt-tr-group"]')
+        table = []
+        for row in rows:
+            cells = row.find_elements(By.CSS_SELECTOR, 'div[role="gridcell"]')
+            book_data = {
+                'image': cells[0].text.strip(),
+                'title': cells[1].text.strip(),
+                'author': cells[2].text.strip(),
+                'publisher': cells[3].text.strip()
+            }
+            table.append(book_data)  # Append each book_data dictionary to the table list
+            
+        ordered_list=[]
+            # Filter and extract data based on ordered_by
+        if ordered_by == 'titles':
+            ordered_list = [row['title'] for row in table if row['title'].strip()] # Strip us used to remove the empty cells
+        elif ordered_by == 'authors':
+            ordered_list = [row['author'] for row in table if row['author'].strip()]
+        elif ordered_by == 'publishers':
+            ordered_list = [row['publisher'] for row in table if row['publisher'].strip()]
+        return ordered_list
         
-  
