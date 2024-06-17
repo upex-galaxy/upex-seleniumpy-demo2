@@ -58,4 +58,9 @@ class Actions_to_execute:
         elif ordered_by == 'publishers':
             ordered_list = [row['publisher'] for row in table if row['publisher'].strip()]
         return ordered_list
-        
+    
+    def test_compare_input_vs_log(self, input_element, log_label):
+            input_value = input_element.get_attribute("value") # Getting the input value
+            log_message = get.byXpath(f"//p[contains(text(), '{log_label}')]").text # Getting the log message
+            log_message_value = log_message[len(log_label):].strip()  # Removing label from the log message
+            assert input_value == log_message_value, f"Input and log message don't match"
