@@ -1,0 +1,16 @@
+Git Pocket Guide
+Learning JavaScript Design Patterns
+Designing Evolvable Web APIs with ASP.NET
+Speaking JavaScript
+You Don't Know JS
+Programming JavaScript Applications
+Eloquent JavaScript, Second Edition
+Understanding ECMAScript 6
+Richard E. Silverman
+Addy Osmani
+Glenn Block et al.
+Axel Rauschmayer
+Kyle Simpson
+Eric Elliott
+Marijn Haverbeke
+Nicholas C. Zakas
