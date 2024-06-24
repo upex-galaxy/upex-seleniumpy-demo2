@@ -20,35 +20,54 @@ class Test_GX3_118_ToolsQA_TextBox:
         web.quit()
     
     def test__fill_fullname(self, precondition):
-        '''TC01: ToolsQA | Elements | Text Box: Fill Form and Submit |
-        Verify if log message matches the added inputs in the form'''
+        '''TC01: Verify if log message matches the added inputs in the form'''
         
-        #Filling out the form
-        name = get.byID("userName")
-        input_name = name.send_keys("Zulema")
-        
-        email = get.byID("userEmail")
-        email.send_keys("zulema@gmail.com")
-        
-        current_address = get.byID("currentAddress")
-        current_address.send_keys("xxx xxxx, xxx, usa")
-        
-        permanent_address= get.byID("permanentAddress")
-        permanent_address.send_keys("xxx xxxx, xxx, usa")
-        
-        get.byID("submit").click()
-        
-        # Verifying if added input mathces the log message displayed
-        do.test_compare_input_vs_log(name, "Name:")
-        do.test_compare_input_vs_log(email, "Email:")
-        do.test_compare_input_vs_log(current_address, "Current Address :")
-        do.test_compare_input_vs_log(permanent_address, "Permananet Address :")
+        with open('tests/zulemaArteaga/data/GX3_118_login_data.csv', 'r') as file:
+            data = csv.DictReader(file)
+            for row in data:
+                name = row['name']
+                email = row['email']
+                current_address = row['current_address']
+                permanent_address = row['permanent_address']
 
+                # Filling out the form
+                name_input = get.byID("userName")
+                name_input.send_keys(name)
+                
+                email_input = get.byID("userEmail")
+                email_input.send_keys(email)
+                
+                current_address_input = get.byID("currentAddress")
+                current_address_input.send_keys(current_address)
+                
+                permanent_address_input= get.byID("permanentAddress")
+                permanent_address_input.send_keys(permanent_address)
+                
+                do.scroll_down_by_pixels(200)
+                get.byID("submit").click()
+                
+
+                name_input_value = name_input.get_attribute("value")          # Getting the attribute of the input
+                log_message_no_label = do.get_log_message_no_label('Name:')   # Getting the log message attribute without label
+                assert  name_input_value == log_message_no_label                        
+                
+                email_input_value = email_input.get_attribute("value")   
+                log_message_no_label = do.get_log_message_no_label('Email:')  
+                assert  email_input_value == log_message_no_label  
+                               
+                current_address_input_value = current_address_input.get_attribute("value")   
+                log_message_no_label = do.get_log_message_no_label('Current Address :')  
+                assert  current_address_input_value == log_message_no_label  
+                   
+                permanent_address_input_value = permanent_address_input.get_attribute("value")   
+                log_message_no_label = do.get_log_message_no_label('Permananet Address :')  
+                assert  permanent_address_input_value == log_message_no_label               
+                
+                web.refresh()
     
     def test_fill_invalid_email(self, precondition):
-        ''' TC02: ToolsQA | Elements | Text Box: Fill Form and Submit |
-        Validating that when adding an INVALID email and clicking submit, a red input border is displayed'''
-        
+        ''' TC02: Validating that when adding an INVALID email and clicking submit, a red input border is displayed'''
+
         email = get.byID("userEmail")
         email.send_keys("zulemagmail.com")
         do.scroll_down_by_pixels(300)
@@ -60,14 +79,13 @@ class Test_GX3_118_ToolsQA_TextBox:
         alphanumeric_after_at = r'@\w+'                 # Invalid if Does not contain (minimum) 1 alphanumeric character after “@”
         dot_after_alphanumeric_after_at = r'@\w+\.'     # Invalid if Does not contain “.” after: 1 alphanumeric character after “@”.
         alphanumeric_after_dot = r'@\w+\.\w+'           # Invalid if Does not contain (minimum) 2 alphanumeric characters after “.”
-        if (re.search(contains_at, email_text) or
-                    re.search(alphanumeric_before_at, email_text) or
-                    re.search(alphanumeric_after_at, email_text) or
-                    re.search(dot_after_alphanumeric_after_at, email_text) or
+        if not (re.search(contains_at, email_text) and
+                    re.search(alphanumeric_before_at, email_text) and
+                    re.search(alphanumeric_after_at, email_text) and
+                    re.search(dot_after_alphanumeric_after_at, email_text) and
                     re.search(alphanumeric_after_dot, email_text)):
-            pass
-        else:
-            assert get.bySelector(".mr-sm-2.field-error.form-control")          # Verify a red border is displayed when adding invalid data in the field email
+            # Assert the error-form to verify a red border is displayed when adding invalid data in the field email
+            assert get.bySelector(".mr-sm-2.field-error.form-control")    
    
 if __name__ == '__main__':
     pytest.main()
