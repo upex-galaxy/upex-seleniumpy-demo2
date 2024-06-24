@@ -41,7 +41,7 @@ def setWebDriver(headless: str, browser: str):
     BROWSER_FUNCTIONS = {
         "chrome": Drivers(run).chromeDriver,
         "edge": Drivers(run).edgeDriver,
-        "firefox": Drivers(run).firefoxDriver
+        "firefox": Drivers(run).firefoxDriver,
     }
     driver = BROWSER_FUNCTIONS.get(browser)
     if not driver:
@@ -62,6 +62,12 @@ def get(web: WebDriver):
     # * Crear nueva instancia de las utilidades de prueba (test utils):
     get = Locators(web)
     return get
+
+@pytest.fixture
+def do(web: WebDriver):
+    # * Crear nueva instancia de las utilidades de prueba (test utils):
+    do = Actions_to_execute(web)
+    return do
 
 
 # * ---- Fixture para usar como BeforeEach y AfterEach: abre y cierra el navegador ----
