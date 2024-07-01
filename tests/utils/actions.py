@@ -64,7 +64,7 @@ class Actions_to_execute:
         return log_message[len(label):].strip()
                 
     def select_an_option_randomly(self, xpath):
-        options = get.byXpaths(xpath)  # Get all the options using the given XPath
+        options = get.byXpaths(xpath)  # Get all the options using the given XPaths
         results = []  # Initialize a list to store the text of each clicked option
 
         for option in options:
@@ -73,3 +73,7 @@ class Actions_to_execute:
             results.append(given_text)  # Add the text of the clicked option to the results list
             options = get.byXpaths(xpath)
             return results  # Return the list of clicked options' textsz
+
+    def fill_input_byID_identifier(self, id_identifier, value):
+        element = get.byID(id_identifier)
+        element.send_keys(value)
