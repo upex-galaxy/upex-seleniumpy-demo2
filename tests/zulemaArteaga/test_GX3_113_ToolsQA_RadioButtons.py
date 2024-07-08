@@ -1,6 +1,4 @@
-import pytest
 from tests.testbase import *
-import time
 
 class Test_GX3_113_ToolsQA_Radio_Buttons:
     @pytest.fixture

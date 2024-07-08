@@ -1,0 +1,8 @@
+name,last_name,email,gender,mobile,subjects,current_address
+John,Doe,john@example.com,Male,6622183864,"Maths, Accounting, Social Studies, Biology, Physics, Chemistry, Computer Science, Commerce, Economics, Civics, Hindi, English, History",123 Main St
+Jane,Smith,jane@example.com,Female,0987654321,"Social Studies",456 Elm St
+Adam,Johnson,adam@example.com,Male,5556667777,Maths,456 Pine St
+Sarah,Williams,sarah@example.com,Female,4443332222,"Physics, Chemistry",789 Oak St
+Alex,Anderson,alex@example.com,Other,2223334444,Commerce,890 Maple St
+Bob,Brown,bob@example.com,Male,3334445555,"History",567 Birch St
+Eve,Evans,eve@example.com,Other,6667778888,"Civics",678 Willow St
