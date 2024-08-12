@@ -69,5 +69,6 @@ class Test_GX3_4595_ToolsQA_TextBox:
             # Assert the error-form to verify a red border is displayed when adding invalid data in the field email
             assert get.bySelector(".mr-sm-2.field-error.form-control")    
    
+   
 if __name__ == '__main__':
     pytest.main()
