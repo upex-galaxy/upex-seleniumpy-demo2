@@ -45,6 +45,8 @@ class Test_GX3_118_ToolsQA_TextBox:
                     # Select Date of birth
                     # birth_day = get.byID("dateOfBirthInput").click()
                     
+                    
+                    
                     subject_input = get.byID('subjectsInput')
                     subjects_list = [subject.strip() for subject in row['subjects'].strip('"').split(',')]
                     for subject in subjects_list:
