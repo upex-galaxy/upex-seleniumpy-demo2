@@ -1,19 +1,31 @@
-name: 🤖CI run Regression in QA🧪
+name: 🤖CI run Regression in MAIN🧪
 run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
 
 on:
+  pull_request:
+    branches:
+      - main  
   push:
     branches:
-      - QA
+      - main
+  workflow_dispatch:  # Manual triggering
+    inputs:
+      test:
+        description: 'Run tests manually'
+        required: false
 
 jobs:
   RegressionTest:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: ['chrome', 'firefox', 'edge']
 
     steps:
       - name: 💻Checkout
         uses: actions/checkout@v3
-
+      
       - name: 💿Set up Python
         uses: actions/setup-python@v3
         with:
@@ -26,3 +38,52 @@ jobs:
 
       - name: 🧪Selenium Run Pytest REGRESSION
         run: pytest --headless=true
+
+      - name: 📦️ Set testExecKey for Jira XRay  
+      # This step sets a specific TXID for the Jira XRay test execution key based on the browser being tested, ensuring that each browser has a unique execution key.
+        if: always()
+        id: setTestExecKey
+        run: |
+          if [[ "${{ matrix.browser }}" == "chrome" ]]; then
+            echo "TXID=GX3-1526" >> $GITHUB_OUTPUT
+          elif [[ "${{ matrix.browser }}" == "firefox" ]]; then
+            echo "TXID=GX3-1527" >> $GITHUB_OUTPUT
+          elif [[ "${{ matrix.browser }}" == "edge" ]]; then
+            echo "TXID=GX3-1528" >> $GITHUB_OUTPUT
+          fi
+
+      - name: ✅Check if XRAY_CLIENT is Defined
+        if: always()
+        run: |
+          if [[ -z "${{ secrets.XRAY_CLIENT_ID }}" ]]; then
+            echo "XRAY_CLIENT_ID is not set. Please set it in the repository secrets to enable Slack notifications."
+          fi
+          if [[ -z "${{ secrets.XRAY_CLIENT_SECRET }}" ]]; then
+            echo "XRAY_CLIENT_SECRET is not set. Please set it in the repository secrets to enable Slack notifications."
+          fi
+      
+      - name: ✅Import Test Results to Xray TX -- ${{ env.TXID }} (${{ matrix.browser }})
+      # This step automates the process of importing test results generated in pytest_html format into Jira XRay
+        if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
+        uses: mikepenz/xray-action@v3
+        with:
+          username: ${{ secrets.XRAY_CLIENT_ID }}
+          password: ${{ secrets.XRAY_CLIENT_SECRET }}
+          testFormat: 'pytest_html' 
+          testPaths: 'reports' 
+          testExecKey: ${{ env.TXID }}  
+          projectKey: 'GX3' 
+
+        env:
+          TXID: ${{ steps.setTestExecKey.outputs.TXID }}
+          XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
+          XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+
+      - name: 📊Upload Artifact ${{ matrix.browser }} Pytest HTML Report
+      # This configuration automates the process of archiving the pytest-html reports in GitHub Actions
+        if: always()  # This step will always run
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-html-report-${{ matrix.browser }}
+          path: reports/pytest_report.html
+          retention-days: 15

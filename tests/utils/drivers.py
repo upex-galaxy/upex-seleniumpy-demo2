@@ -79,6 +79,14 @@ class Drivers:
             chrome.close()
             chrome.switch_to.window(original_window)
             return chrome
+    
+    def chromeDriver_no_add_extension(self):
+        if self.isHeadless == True:
+            execution = ChromeOpt()
+            execution.add_argument("--headless")
+            return webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()), options=execution)
+        else:
+            return webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()))
 
     def edgeDriver(self):
         # *  Se crea una instancia del Microsoft Edge

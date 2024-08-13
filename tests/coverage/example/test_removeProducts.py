@@ -2,7 +2,7 @@ from random import randint
 import pytest
 from tests.testbase import *
 
-
+@pytest.mark.skip(reason="just a script example")
 class TestRemoveProducts:
 
     # * TC1: (No POM) Validate adding and removing one Product, the shoppingCart should be empty

@@ -1,7 +1,7 @@
 import pytest
 from tests.testbase import *
 
-
+@pytest.mark.skip(reason="just a script example")
 class TestSuiteLogin:
 
     # *ExampleTest: uses a fixture "Login" as precondition, then validate that inventory list page has 6 items

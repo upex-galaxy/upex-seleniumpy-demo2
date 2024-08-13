@@ -1,7 +1,7 @@
 import pytest
 from tests.testbase import *
 
-
+@pytest.mark.skip(reason="just a script example")
 class TestSuite:
     # * Este es otro ejemplo de Suite usando otro Fixture y con más de un caso de Prueba:
 

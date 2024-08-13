@@ -1,6 +1,6 @@
 from tests.testbase import *
 
-
+@pytest.mark.skip(reason="just a script example")
 class LoginPage:
     def __init__(self, driver: WebDriver, locator: Locators):
         self.web = driver

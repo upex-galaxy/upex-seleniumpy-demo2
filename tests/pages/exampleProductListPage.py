@@ -3,7 +3,7 @@ from tests.testbase import *
 priceValue = str
 nameValue = str
 
-
+@pytest.mark.skip(reason="just a script example")
 class ProductListPage:
     def __init__(self, driver: WebDriver, locators: Locators):
         self.web = driver

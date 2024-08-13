@@ -1,0 +1,1042 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.14, pytest-7.2.0, pluggy-1.0.0
+rootdir: /app
+plugins: metadata-3.1.1, html-4.1.1
+collected 20 items
+
+tests/coverage/example/test_example.py s                                 [  5%]
+tests/coverage/example/test_removeProducts.py s                          [ 10%]
+tests/how_to/test_tutorial_fixture2.py ss                                [ 20%]
+tests/zulemaArteaga/test_GX3-116_ToosQA_Buttons.py EEE                   [ 35%]
+tests/zulemaArteaga/test_GX3_109_ToolsQA_BookStore.py EEE                [ 50%]
+tests/zulemaArteaga/test_GX3_110_ToolsQA_PracticeForm.py E               [ 55%]
+tests/zulemaArteaga/test_GX3_113_ToolsQA_RadioButtons.py EEE             [ 70%]
+tests/zulemaArteaga/test_GX3_118_ToolsQA_TextBox.py EE                   [ 80%]
+tests/zulemaArteaga/test_GX3_431_ToolsQA_SelectMenu.py EEE               [ 95%]
+tests/zulemaArteaga/test_example_dropdowns.py s                          [100%]
+
+==================================== ERRORS ====================================
+__________ ERROR at setup of Test_GX3_116_Button.test_double_clickme ___________
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff91630130>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+___________ ERROR at setup of Test_GX3_116_Button.test_right_clickme ___________
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff914a7850>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+_______ ERROR at setup of Test_GX3_116_Button.test_TC03_clickme_dymanic ________
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff914cb3a0>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+_ ERROR at setup of Test_GX3_109_ToolsQA_BookStore.test_filter_books_in_search_bar _
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff915fab00>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+______ ERROR at setup of Test_GX3_109_ToolsQA_BookStore.test_login_button ______
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff91516c20>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+________ ERROR at setup of Test_GX3_109_ToolsQA_BookStore.test_order_by ________
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff9161dff0>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+____ ERROR at setup of Test_GX3_110_ToolsQA_PracticeForm.test_fill_out_form ____
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff914cabf0>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+_____ ERROR at setup of Test_GX3_113_ToolsQA_Radio_Buttons.test_click_yes ______
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff916515d0>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+__ ERROR at setup of Test_GX3_113_ToolsQA_Radio_Buttons.test_click_impresive ___
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff9155f340>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+____ ERROR at setup of Test_GX3_113_ToolsQA_Radio_Buttons.test_113_no_click ____
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff9152da80>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+______ ERROR at setup of Test_GX3_118_ToolsQA_TextBox.test__fill_fullname ______
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff9161fc70>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+____ ERROR at setup of Test_GX3_118_ToolsQA_TextBox.test_fill_invalid_email ____
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff915fafe0>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+______ ERROR at setup of Test_GX3_431_ToolsQA_SelectMenu.test_select_one _______
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff9155d2a0>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+____ ERROR at setup of Test_GX3_431_ToolsQA_SelectMenu.test_multi_drop_down ____
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff915f9900>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+_ ERROR at setup of Test_GX3_431_ToolsQA_SelectMenu.test_standart_multi_select _
+
+headless = 'false', browser = 'chrome'
+
+    @pytest.fixture
+    def setWebDriver(headless: str, browser: str):
+        # * Convertir el valor de headless a boolean:
+        run = True if headless == "true" else False
+        # * Crear la instancia del Driver (dado el driver elegido por CLI):
+        BROWSER_FUNCTIONS = {
+            "chrome": Drivers(run).chromeDriver,
+            "edge": Drivers(run).edgeDriver,
+            "firefox": Drivers(run).firefoxDriver,
+        }
+        driver = BROWSER_FUNCTIONS.get(browser)
+        if not driver:
+            raise ValueError(f'Browser "{browser}" not supported.')
+    
+>       runDriver: WebDriver = driver()
+
+tests/conftest.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/drivers.py:67: in chromeDriver
+    chrome = webdriver.Chrome(service=ChromiumService(
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py:69: in __init__
+    super().__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py:89: in __init__
+    self.service.start()
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:98: in start
+    self.assert_process_still_running()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.chrome.service.Service object at 0xffff9152f940>
+
+    def assert_process_still_running(self):
+        return_code = self.process.poll()
+        if return_code:
+>           raise WebDriverException(
+                'Service %s unexpectedly exited. Status code was: %s'
+                % (self.path, return_code)
+            )
+E           selenium.common.exceptions.WebDriverException: Message: Service /root/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver unexpectedly exited. Status code was: 255
+
+/usr/local/lib/python3.10/site-packages/selenium/webdriver/common/service.py:110: WebDriverException
+---------------------------- Captured stderr setup -----------------------------
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+/bin/sh: 1: google-chrome: not found
+/bin/sh: 1: google-chrome-stable: not found
+/bin/sh: 1: google-chrome-beta: not found
+/bin/sh: 1: google-chrome-dev: not found
+=============================== warnings summary ===============================
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/coverage/example/test_example.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/coverage/example/test_removeProducts.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/how_to/test_tutorial_fixture2.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/zulemaArteaga/test_GX3-116_ToosQA_Buttons.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/zulemaArteaga/test_GX3_109_ToolsQA_BookStore.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/zulemaArteaga/test_GX3_110_ToolsQA_PracticeForm.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/zulemaArteaga/test_GX3_113_ToolsQA_RadioButtons.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/zulemaArteaga/test_GX3_118_ToolsQA_TextBox.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/zulemaArteaga/test_GX3_431_ToolsQA_SelectMenu.py)
+
+.:0
+  :0: PytestCollectionWarning: cannot collect test class 'tuple' because it has a __new__ constructor (from: tests/zulemaArteaga/test_example_dropdowns.py)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/zulemaArteaga/test_GX3-116_ToosQA_Buttons.py::Test_GX3_116_Button::test_double_clickme
+ERROR tests/zulemaArteaga/test_GX3-116_ToosQA_Buttons.py::Test_GX3_116_Button::test_right_clickme
+ERROR tests/zulemaArteaga/test_GX3-116_ToosQA_Buttons.py::Test_GX3_116_Button::test_TC03_clickme_dymanic
+ERROR tests/zulemaArteaga/test_GX3_109_ToolsQA_BookStore.py::Test_GX3_109_ToolsQA_BookStore::test_filter_books_in_search_bar
+ERROR tests/zulemaArteaga/test_GX3_109_ToolsQA_BookStore.py::Test_GX3_109_ToolsQA_BookStore::test_login_button
+ERROR tests/zulemaArteaga/test_GX3_109_ToolsQA_BookStore.py::Test_GX3_109_ToolsQA_BookStore::test_order_by
+ERROR tests/zulemaArteaga/test_GX3_110_ToolsQA_PracticeForm.py::Test_GX3_110_ToolsQA_PracticeForm::test_fill_out_form
+ERROR tests/zulemaArteaga/test_GX3_113_ToolsQA_RadioButtons.py::Test_GX3_113_ToolsQA_Radio_Buttons::test_click_yes
+ERROR tests/zulemaArteaga/test_GX3_113_ToolsQA_RadioButtons.py::Test_GX3_113_ToolsQA_Radio_Buttons::test_click_impresive
+ERROR tests/zulemaArteaga/test_GX3_113_ToolsQA_RadioButtons.py::Test_GX3_113_ToolsQA_Radio_Buttons::test_113_no_click
+ERROR tests/zulemaArteaga/test_GX3_118_ToolsQA_TextBox.py::Test_GX3_118_ToolsQA_TextBox::test__fill_fullname
+ERROR tests/zulemaArteaga/test_GX3_118_ToolsQA_TextBox.py::Test_GX3_118_ToolsQA_TextBox::test_fill_invalid_email
+ERROR tests/zulemaArteaga/test_GX3_431_ToolsQA_SelectMenu.py::Test_GX3_431_ToolsQA_SelectMenu::test_select_one
+ERROR tests/zulemaArteaga/test_GX3_431_ToolsQA_SelectMenu.py::Test_GX3_431_ToolsQA_SelectMenu::test_multi_drop_down
+ERROR tests/zulemaArteaga/test_GX3_431_ToolsQA_SelectMenu.py::Test_GX3_431_ToolsQA_SelectMenu::test_standart_multi_select
+================= 5 skipped, 10 warnings, 15 errors in 20.62s ==================
