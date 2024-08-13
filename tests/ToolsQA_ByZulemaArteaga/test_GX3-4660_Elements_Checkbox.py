@@ -44,5 +44,5 @@ class Test_GX3_4660_Elements_Checkbox:
         random_ckeckbox = do.click_randomly("//span[@class='rct-checkbox']")
         assert get.bySelector("*:checked")
         
-if __name__ == '__main__':E
+if __name__ == '__main__':
     pytest.main()

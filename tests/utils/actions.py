@@ -77,3 +77,17 @@ class Actions_to_execute:
     def fill_input_byID_identifier(self, id_identifier, value):
         element = get.byID(id_identifier)
         element.send_keys(value)
+        return element
+        
+    def select_dropdown_by_value(self, xpath, value):
+        dropdown = get.byXpath(xpath)
+        select = Select(dropdown)
+        select.select_by_visible_text(value)
+    
+    def click_randomly(self, xpath):
+        options = get.byXpaths(xpath)  # Get all the options using the given XPaths
+        if options:
+            option = random.choice(options)  # Select a random option
+            given_text = option.text  # Get the text of the selected option
+            option.click()  # Click on the selected option
+            
