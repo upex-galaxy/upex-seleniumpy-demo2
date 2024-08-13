@@ -1,28 +1,29 @@
 name: 🤖CI run Regression in QA🧪
 run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
 
-on:
-  push:
-    branches:
-      - QA
+on: # When I want to run this PIPELINE...
+  push: # on every push
+    branches: # to these branches
+    - main # only main branch
+  workflow_dispatch: # or when I want to run it manually
 
 jobs:
   RegressionTest:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 💻Checkout
-        uses: actions/checkout@v3
+    - name: 💻Checkout
+      uses: actions/checkout@v3
 
-      - name: 💿Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.11.5'
+    - name: 💿Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11.5'
 
-      - name: 🧬Install all DevDependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+    - name: 🧬Install all DevDependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: 🧪Selenium Run Pytest REGRESSION
-        run: pytest --headless=true
+    - name: 🧪Selenium Run Pytest REGRESSION
+      run: pytest --headless=true

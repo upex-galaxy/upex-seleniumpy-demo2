@@ -1,6 +1,6 @@
 from tests.testbase import *
 
-class Test_GX3_431_ToolsQA_SelectMenu:
+class Test_GX3_3854_Dropdown_SelectMenu:
     
     @pytest.fixture
     def precondition(self, setWebDriver: WebDriver):
@@ -25,7 +25,7 @@ class Test_GX3_431_ToolsQA_SelectMenu:
         select_option()
 
         def select_title():
-            '''TC02: Validate succesfully Select One from drop down '''
+            '''TC02: Validate succesfully Select One from drop down'''
             do.select_an_option_randomly('//*[starts-with(@id, "react-select-3")][contains(@id, "option")]')
         get.contains('Select Title').click()
         select_title()
@@ -42,7 +42,7 @@ class Test_GX3_431_ToolsQA_SelectMenu:
     # Scenario 2: User selects one or more elements from "Multiselect drop down" menu'''    
     def test_multi_drop_down(self, precondition):
         '''TC04: Validate succesfully selects Multiselect drop down'''
-        do.scroll_down_by_pixels(250)
+        do.scroll_down_by_pixels(350)
         select_option = get.contains("Select...")
         select_option.click()
         time.sleep(1)
