@@ -1,5 +1,5 @@
 from tests.testbase import *
-@pytest.mark.skip(reason="Currently not testing this")   
+  
 class Test_GX3_4644_ToolsQA_PracticeForm:
     
     @pytest.fixture
@@ -43,8 +43,12 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     date = [date_part.strip() for date_part in row['date_of_birth'].strip('"').split(',')]
                     month, day, year = date[0].strip('"').split('/')
                     
-                    do.select_dropdown_by_value("//div[contains(@class, 'react-datepicker__month-dropdown')]/select", month)
-                    do.select_dropdown_by_value("//div[contains(@class, 'react-datepicker__year-dropdown')]/select", year)
+                    month_element = get.byClass('react-datepicker__month-select')
+                    do.select_by_visible_text(month_element, month)
+                    
+                    year_element = get.byClass('react-datepicker__year-select')
+                    do.select_by_visible_text(year_element, year)
+
                     day = get.byXpath( f"//div[contains(@class, 'react-datepicker__day') and text()='{day}']").click()
                     
             # Select subjects

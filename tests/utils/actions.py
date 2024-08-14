@@ -78,8 +78,9 @@ class Actions_to_execute:
         element = get.byID(id_identifier)
         element.send_keys(value)
     
-    def select_dropdown_by_value(self, dropdown_xpath, value):
-        dropdown_element = get.byXpath(dropdown_xpath)
-        select = Select(dropdown_element)
-        select.select_by_value(value)
+    def select_by_visible_text(self, element: WebElement, text: str):
+        select = Select(element)
+        select.select_by_visible_text(text)
+        return select
+
         
