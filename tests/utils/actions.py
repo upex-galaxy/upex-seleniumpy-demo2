@@ -77,3 +77,9 @@ class Actions_to_execute:
     def fill_input_byID_identifier(self, id_identifier, value):
         element = get.byID(id_identifier)
         element.send_keys(value)
+    
+    def select_dropdown_by_value(self, dropdown_xpath, value):
+        dropdown_element = get.byXpath(dropdown_xpath)
+        select = Select(dropdown_element)
+        select.select_by_value(value)
+        

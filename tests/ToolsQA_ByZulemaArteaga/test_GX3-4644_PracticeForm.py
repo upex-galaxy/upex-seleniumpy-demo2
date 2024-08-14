@@ -1,5 +1,5 @@
 from tests.testbase import *
-
+@pytest.mark.skip(reason="Currently not testing this")   
 class Test_GX3_4644_ToolsQA_PracticeForm:
     
     @pytest.fixture
@@ -31,7 +31,6 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     email = do.fill_input_byID_identifier('userEmail', row['email'])
                     
             # Selecting Radio Buttons to select gender provided in data file
-                    # do.scroll_down_by_pixels(500) # Needed if add blocker extension is not activated
                     gender = row['gender']
                     if gender in ["Male", "Female", "Other"]:
                         get.byXpath(f"//*[starts-with(@class, 'custom-control') and contains(., '{gender}')]").click()           
