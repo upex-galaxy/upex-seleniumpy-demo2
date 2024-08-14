@@ -1,5 +1,5 @@
 name,last_name,email,gender,mobile,subjects,current_address,date_of_birth,hobbies
-John,Doe,john@example.com,Male,6622183864,"Maths, Accounting, Social Studies, Biology, Physics, Chemistry, Computer Science, Commerce, Economics, Civics, Hindi, English, History",123 Main St, "May/25/2015", 
+John,Doe,john@example.com,Male,6622183864,"Maths, Accounting, Social Studies, Biology, Physics, Chemistry, Computer Science, Commerce, Economics, Civics, Hindi, English, History",123 Main St, "May/25/2015",
 Dan,Adams,dan@example.com,Other,6667778888,"Civics",678 Willow St,"June/15/2010","Sports,Reading,Music"
 Jane,Smith,jane@example.com,Female,0987654321,"Social Studies",456 Elm St,"June/15/2010", "Reading,Music"
 Sarah,Williams,sarah@example.com,Female,4443332222,"Physics, Chemistry",789 Oak St,"September/5/2011","Sports,Music"

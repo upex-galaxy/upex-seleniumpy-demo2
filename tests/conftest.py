@@ -1,3 +1,4 @@
+from tests.testbase import *
 import pytest
 # * Aquí se importa todos los artilugios generado de nuestro archivo de drivers!
 # * Primero, se importa siempre "pytest" librería de Python para realizar pruebas (the best!)
