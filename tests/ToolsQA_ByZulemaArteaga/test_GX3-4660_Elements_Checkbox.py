@@ -41,8 +41,8 @@ class Test_GX3_4660_Elements_Checkbox:
     def test_random_checkbox(self, precondition):
         '''Validate select random checkboxes'''
         expand_all = get.bySelector("button.rct-option.rct-option-expand-all").click()
-        random_ckeckbox = do.click_randomly("//span[@class='rct-checkbox']")
+        random_ckeckbox = do.select_an_option_randomly("//span[@class='rct-checkbox']")
         assert get.bySelector("*:checked")
         
-if __name__ == '__main__':E
+if __name__ == '__main__':
     pytest.main()

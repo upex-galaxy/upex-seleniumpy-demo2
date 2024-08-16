@@ -77,3 +77,8 @@ class Actions_to_execute:
     def fill_input_byID_identifier(self, id_identifier, value):
         element = get.byID(id_identifier)
         element.send_keys(value)
+    
+    def select_by_visible_text(self, element: WebElement, text: str):
+        select = Select(element)
+        select.select_by_visible_text(text)
+        return select
