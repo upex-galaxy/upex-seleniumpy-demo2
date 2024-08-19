@@ -31,7 +31,6 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     email = do.fill_input_byID_identifier('userEmail', row['email'])
                     
             # Selecting Radio Buttons to select gender provided in data file
-                   
                     gender = row['gender']
                     if gender in ["Male", "Female", "Other"]:
                         get.byXpath(f"//*[starts-with(@class, 'custom-control') and contains(., '{gender}')]").click()           
@@ -40,7 +39,7 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     mobile = do.fill_input_byID_identifier('userNumber', row['mobile'])
                     
             # Select Date of birth
-                    calendar_input = get.byID("dateOfBirthInput").click()
+                    calendar_input = get.byClass("react-datepicker__input-container").click()
                     date = [date_part.strip() for date_part in row['date_of_birth'].strip('"').split(',')]
                     month, day, year = date[0].strip('"').split('/')
                     
@@ -51,12 +50,11 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     day = get.byXpath( f"//div[contains(@class, 'react-datepicker__day') and text()='{day}']").click()
                     
             # Select subjects
-                    wait(5)
                     subject_input = get.byID('subjectsInput')
                     subjects_list = [subject.strip() for subject in row['subjects'].strip('"').split(',')]
                     for subject in subjects_list:
                         subject_input.send_keys(subject[:3])  # Typing the first 3 letters of each subject
-                        wait(.5) # Waiting for the subject option to appear
+                        wait(1) # Waiting for the subject option to appear
                         subject_option = get.byXpath(f"//div[text()='{subject}']")
                         subject_option.click()
                  
@@ -74,13 +72,14 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     current_address = do.fill_input_byID_identifier('currentAddress', row['current_address'])
                     
             # Submit form
-                    do.scroll_down_by_pixels(300)
+                    do.scroll_down_by_pixels(250)
                     get.byID("submit").click()
                     
         # Verify the submit information/confirmation window
                     assert get.contains("Thanks for submitting the form")
                     
         # Closing the popup window and refresh page 
+                    do.scroll_down_by_pixels(300)
                     get.byID("closeLargeModal").click() 
                     web.refresh()
 
