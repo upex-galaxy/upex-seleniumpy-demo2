@@ -1,4 +1,6 @@
 from tests.testbase import *
+from datetime import datetime
+
 
 class Actions_to_execute:
     def __init__(self, driver: WebDriver):
@@ -82,3 +84,8 @@ class Actions_to_execute:
         select = Select(element)
         select.select_by_visible_text(text)
         return select
+
+    def take_screenshot(self):
+        time.sleep(1)
+        file_name = f'{datetime.today().strftime("%Y-%m-%d_%H-%M-%S")}.png'.replace("/", "_").replace("::", "__")
+        self.web.save_screenshot(file_name)

@@ -24,21 +24,22 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
             with open('tests/ToolsQA_ByZulemaArteaga/data/GX3-4644_PracticeForm_data.csv', 'r') as file:
                 data = csv.DictReader(file)
             
-            # Filling out the form with the data in file  
+            try:
+                # Filling out the form with the data in file  
                 for row in data:
                     name = do.fill_input_byID_identifier("firstName", row['name'])
                     last_name = do.fill_input_byID_identifier("lastName", row['last_name'])
                     email = do.fill_input_byID_identifier('userEmail', row['email'])
                     
-            # Selecting Radio Buttons to select gender provided in data file
+                    # Selecting Radio Buttons to select gender provided in data file
                     gender = row['gender']
                     if gender in ["Male", "Female", "Other"]:
                         get.byXpath(f"//*[starts-with(@class, 'custom-control') and contains(., '{gender}')]").click()           
                 
-            # Add mobile number
+                    # Add mobile number
                     mobile = do.fill_input_byID_identifier('userNumber', row['mobile'])
                     
-            # Select Date of birth
+                    # Select Date of birth
                     calendar_input = get.byClass("react-datepicker__input-container").click()
                     date = [date_part.strip() for date_part in row['date_of_birth'].strip('"').split(',')]
                     month, day, year = date[0].strip('"').split('/')
@@ -48,17 +49,17 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     year_element = get.byClass('react-datepicker__year-select')
                     do.select_by_visible_text(year_element, year)
                     day = get.byXpath( f"//div[contains(@class, 'react-datepicker__day') and text()='{day}']").click()
-                    
-            # Select subjects
+
+                    # Select subjects
                     subject_input = get.byID('subjectsInput')
                     subjects_list = [subject.strip() for subject in row['subjects'].strip('"').split(',')]
                     for subject in subjects_list:
                         subject_input.send_keys(subject[:3])  # Typing the first 3 letters of each subject
-                        wait(1) # Waiting for the subject option to appear
+                        wait(2) # Waiting for the subject option to appear
                         subject_option = get.byXpath(f"//div[text()='{subject}']")
                         subject_option.click()
                  
-            # Select Hobbies
+                    # Select Hobbies
                     hobbies = [hobby.strip() for hobby in row['hobbies'].strip('"').split(',')] # Splitting the hobbies from the string
                     for hobby in hobbies:
                         try:
@@ -67,21 +68,24 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                             elif hobby == 'Music': get.contains("Music").click()
                         except NoSuchElementException: # If no hobbies
                             pass
+
                         
-            # Add Address
+                    # Add Address
                     current_address = do.fill_input_byID_identifier('currentAddress', row['current_address'])
                     
-            # Submit form
+                    # Submit form
                     do.scroll_down_by_pixels(250)
                     get.byID("submit").click()
                     
-        # Verify the submit information/confirmation window
+                    # Verify the submit information/confirmation window
                     assert get.contains("Thanks for submitting the form")
                     
-        # Closing the popup window and refresh page 
+                    # Closing the popup window and refresh page 
                     do.scroll_down_by_pixels(300)
                     get.byID("closeLargeModal").click() 
                     web.refresh()
-
+            except:
+                do.take_screenshot
+                
 if __name__ == '__main__':
     pytest.main()
