@@ -1,4 +1,6 @@
 from tests.testbase import *
+from datetime import datetime
+
 
 class Actions_to_execute:
     def __init__(self, driver: WebDriver):
@@ -77,3 +79,13 @@ class Actions_to_execute:
     def fill_input_byID_identifier(self, id_identifier, value):
         element = get.byID(id_identifier)
         element.send_keys(value)
+    
+    def select_by_visible_text(self, element: WebElement, text: str):
+        select = Select(element)
+        select.select_by_visible_text(text)
+        return select
+
+    def take_screenshot(self):
+        time.sleep(1)
+        file_name = f'{datetime.today().strftime("%Y-%m-%d_%H-%M-%S")}.png'.replace("/", "_").replace("::", "__")
+        self.web.save_screenshot(file_name)

@@ -35,15 +35,15 @@ class Test_GX3_4595_ToolsQA_TextBox:
                 get.byID("submit").click()
 
             # Verify if typed input matches the log message displayed
-                def input_value_matches_log(input_element: WebElement, log_label: str):
+                def input_value_matches_log(input_element, log_label: str):
                     input_value = input_element.get_attribute("value")
                     log_message_no_label = do.get_log_message_no_label(log_label)
                     assert input_value == log_message_no_label, f"Mismatch, typed input doesn't match log message displayed"
-                    
-                    assert input_value_matches_log(name, 'Name:')
-                    assert input_value_matches_log(email, 'Email:')
-                    assert input_value_matches_log(current_address, 'Current Address :')
-                    assert input_value_matches_log(permanent_address, 'Permananet Address :')            
+                
+                    input_value_matches_log(name, 'Name:')
+                    input_value_matches_log(email, 'Email:')
+                    input_value_matches_log(current_address, 'Current Address :')
+                    input_value_matches_log(permanent_address, 'Permananet Address :')           
                 
                 web.refresh()
     

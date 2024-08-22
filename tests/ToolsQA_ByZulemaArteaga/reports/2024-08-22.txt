@@ -1,0 +1,433 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.2, pytest-7.2.0, pluggy-1.0.0
+rootdir: /Users/zulemaarteaga/Documents/GitRepos/upex-seleniumpy-demo2
+plugins: bdd-7.2.0, html-4.1.1, metadata-3.1.1
+collected 20 items
+
+tests/ToolsQA_ByZulemaArteaga/test_GX3-3854_Dropdpwn.py .F.              [ 15%]
+tests/ToolsQA_ByZulemaArteaga/test_GX3-4644_PracticeForm.py s            [ 20%]
+tests/ToolsQA_ByZulemaArteaga/test_GX3-4652_Elements.py ...              [ 35%]
+tests/ToolsQA_ByZulemaArteaga/test_GX3-4660_Elements_Checkbox.py ....    [ 55%]
+tests/ToolsQA_ByZulemaArteaga/test_GX3-4668_Elements_Buttons.py ...      [ 70%]
+tests/ToolsQA_ByZulemaArteaga/test_GX3_4595_Textbox.py F.                [ 80%]
+tests/coverage/example/test_example.py s                                 [ 85%]
+tests/coverage/example/test_removeProducts.py s                          [ 90%]
+tests/how_to/test_tutorial_fixture2.py ss                                [100%]
+
+=================================== FAILURES ===================================
+____________ Test_GX3_3854_Dropdown_SelectMenu.test_multi_drop_down ____________
+
+self = <tests.ToolsQA_ByZulemaArteaga.test_GX3-3854_Dropdpwn.Test_GX3_3854_Dropdown_SelectMenu object at 0x10dfc3d70>
+precondition = None
+
+    def test_multi_drop_down(self, precondition):
+        '''TC04: Validate succesfully selects Multiselect drop down'''
+        do.scroll_down_by_pixels(350)
+        select_option = get.contains("Select...")
+        select_option.click()
+        time.sleep(1)
+        color_options = get.byXpaths(
+                '//*[starts-with(@id, "react-select-4")][contains(@id, "option")]')
+        for color in color_options:
+>           color.click()
+
+tests/ToolsQA_ByZulemaArteaga/test_GX3-3854_Dropdpwn.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/webelement.py:88: in click
+    self._execute(Command.CLICK_ELEMENT)
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/webelement.py:396: in _execute
+    return self._parent.execute(command, params)
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/webdriver.py:429: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x10e08a630>
+response = {'status': 404, 'value': '{"value":{"error":"stale element reference","message":"stale element reference: stale elemen...ff804b0b259 _pthread_start + 125\\n25  libsystem_pthread.dylib             0x00007ff804b06c7b thread_start + 15\\n"}}'}
+
+    def check_response(self, response: Dict[str, Any]) -> None:
+        """
+        Checks that a JSON response from the WebDriver does not have an error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get('status', None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get('value', None)
+            if value_json and isinstance(value_json, str):
+                import json
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value['value']
+                    status = value.get('error', None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get('message')
+                    else:
+                        message = value.get('message', None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_SHADOW_ROOT:
+            exception_class = NoSuchShadowRootException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif status in ErrorCode.INVALID_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = InvalidCookieDomainException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = UnableToSetCookieException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        elif status in ErrorCode.JAVASCRIPT_ERROR:
+            exception_class = JavascriptException
+        elif status in ErrorCode.SESSION_NOT_CREATED:
+            exception_class = SessionNotCreatedException
+        elif status in ErrorCode.INVALID_ARGUMENT:
+            exception_class = InvalidArgumentException
+        elif status in ErrorCode.NO_SUCH_COOKIE:
+            exception_class = NoSuchCookieException
+        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:
+            exception_class = ScreenshotException
+        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:
+            exception_class = ElementClickInterceptedException
+        elif status in ErrorCode.INSECURE_CERTIFICATE:
+            exception_class = InsecureCertificateException
+        elif status in ErrorCode.INVALID_COORDINATES:
+            exception_class = InvalidCoordinatesException
+        elif status in ErrorCode.INVALID_SESSION_ID:
+            exception_class = InvalidSessionIdException
+        elif status in ErrorCode.UNKNOWN_METHOD:
+            exception_class = UnknownMethodException
+        else:
+            exception_class = WebDriverException
+        if not value:
+            value = response['value']
+        if isinstance(value, str):
+            raise exception_class(value)
+        if message == "" and 'message' in value:
+            message = value['message']
+    
+        screen = None  # type: ignore[assignment]
+        if 'screen' in value:
+            screen = value['screen']
+    
+        stacktrace = None
+        st_value = value.get('stackTrace') or value.get('stacktrace')
+        if st_value:
+            if isinstance(st_value, str):
+                stacktrace = st_value.split('\n')
+            else:
+                stacktrace = []
+                try:
+                    for frame in st_value:
+                        line = frame.get("lineNumber", "")
+                        file = frame.get("fileName", "<anonymous>")
+                        if line:
+                            file = f"{file}:{line}"
+                        meth = frame.get('methodName', '<anonymous>')
+                        if 'className' in frame:
+                            meth = "{}.{}".format(frame['className'], meth)
+                        msg = "    at %s (%s)"
+                        msg = msg % (meth, file)
+                        stacktrace.append(msg)
+                except TypeError:
+                    pass
+        if exception_class == UnexpectedAlertPresentException:
+            alert_text = None
+            if 'data' in value:
+                alert_text = value['data'].get('text')
+            elif 'alert' in value:
+                alert_text = value['alert'].get('text')
+            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+E         (Session info: chrome=127.0.6533.120)
+E       Stacktrace:
+E       0   chromedriver                        0x00000001031198b8 chromedriver + 5179576
+E       1   chromedriver                        0x00000001031112ea chromedriver + 5145322
+E       2   chromedriver                        0x0000000102c882b0 chromedriver + 389808
+E       3   chromedriver                        0x0000000102c8e0b5 chromedriver + 413877
+E       4   chromedriver                        0x0000000102c8fd6f chromedriver + 421231
+E       5   chromedriver                        0x0000000102c8fe1c chromedriver + 421404
+E       6   chromedriver                        0x0000000102cd610a chromedriver + 708874
+E       7   chromedriver                        0x0000000102cc9354 chromedriver + 656212
+E       8   chromedriver                        0x0000000102cf67b2 chromedriver + 841650
+E       9   chromedriver                        0x0000000102cc8e58 chromedriver + 654936
+E       10  chromedriver                        0x0000000102cf696e chromedriver + 842094
+E       11  chromedriver                        0x0000000102d13b9b chromedriver + 961435
+E       12  chromedriver                        0x0000000102cf6553 chromedriver + 841043
+E       13  chromedriver                        0x0000000102cc77f6 chromedriver + 649206
+E       14  chromedriver                        0x0000000102cc805e chromedriver + 651358
+E       15  chromedriver                        0x00000001030dcb20 chromedriver + 4930336
+E       16  chromedriver                        0x00000001030e1a36 chromedriver + 4950582
+E       17  chromedriver                        0x00000001030e2105 chromedriver + 4952325
+E       18  chromedriver                        0x00000001030beee9 chromedriver + 4808425
+E       19  chromedriver                        0x00000001030e23f9 chromedriver + 4953081
+E       20  chromedriver                        0x00000001030b0844 chromedriver + 4749380
+E       21  chromedriver                        0x00000001031015c8 chromedriver + 5080520
+E       22  chromedriver                        0x0000000103101787 chromedriver + 5080967
+E       23  chromedriver                        0x0000000103110ece chromedriver + 5144270
+E       24  libsystem_pthread.dylib             0x00007ff804b0b259 _pthread_start + 125
+E       25  libsystem_pthread.dylib             0x00007ff804b06c7b thread_start + 15
+
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/errorhandler.py:243: StaleElementReferenceException
+_______________ Test_GX3_4595_ToolsQA_TextBox.test_fill_fullname _______________
+
+self = <tests.ToolsQA_ByZulemaArteaga.test_GX3_4595_Textbox.Test_GX3_4595_ToolsQA_TextBox object at 0x10e030050>
+precondition = None
+
+    def test_fill_fullname(self, precondition):
+        '''TC01: Verify if log message matches the added inputs in the form'''
+    
+        # Importing data from cvs file to fill out the Text Box form
+        with open('tests/ToolsQA_ByZulemaArteaga/data/GX3_4595_login_data.csv', 'r') as file:
+            data = csv.DictReader(file)
+    
+            # Filling out the form with the data in file
+            for row in data:
+                name = do.fill_input_byID_identifier("userName", row['name'])
+                email = do.fill_input_byID_identifier("userEmail", row['email'])
+                current_address = do.fill_input_byID_identifier("currentAddress", row['current_address'])
+                permanent_address = do.fill_input_byID_identifier("permanentAddress", row['permanent_address'])
+    
+            # Submit form
+                do.scroll_down_by_pixels(200)
+>               get.byID("submit").click()
+
+tests/ToolsQA_ByZulemaArteaga/test_GX3_4595_Textbox.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/webelement.py:88: in click
+    self._execute(Command.CLICK_ELEMENT)
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/webelement.py:396: in _execute
+    return self._parent.execute(command, params)
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/webdriver.py:429: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x10e0c84d0>
+response = {'status': 400, 'value': '{"value":{"error":"element click intercepted","message":"element click intercepted: Element ...ff804b0b259 _pthread_start + 125\\n25  libsystem_pthread.dylib             0x00007ff804b06c7b thread_start + 15\\n"}}'}
+
+    def check_response(self, response: Dict[str, Any]) -> None:
+        """
+        Checks that a JSON response from the WebDriver does not have an error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get('status', None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get('value', None)
+            if value_json and isinstance(value_json, str):
+                import json
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value['value']
+                    status = value.get('error', None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get('message')
+                    else:
+                        message = value.get('message', None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_SHADOW_ROOT:
+            exception_class = NoSuchShadowRootException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif status in ErrorCode.INVALID_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = InvalidCookieDomainException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = UnableToSetCookieException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        elif status in ErrorCode.JAVASCRIPT_ERROR:
+            exception_class = JavascriptException
+        elif status in ErrorCode.SESSION_NOT_CREATED:
+            exception_class = SessionNotCreatedException
+        elif status in ErrorCode.INVALID_ARGUMENT:
+            exception_class = InvalidArgumentException
+        elif status in ErrorCode.NO_SUCH_COOKIE:
+            exception_class = NoSuchCookieException
+        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:
+            exception_class = ScreenshotException
+        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:
+            exception_class = ElementClickInterceptedException
+        elif status in ErrorCode.INSECURE_CERTIFICATE:
+            exception_class = InsecureCertificateException
+        elif status in ErrorCode.INVALID_COORDINATES:
+            exception_class = InvalidCoordinatesException
+        elif status in ErrorCode.INVALID_SESSION_ID:
+            exception_class = InvalidSessionIdException
+        elif status in ErrorCode.UNKNOWN_METHOD:
+            exception_class = UnknownMethodException
+        else:
+            exception_class = WebDriverException
+        if not value:
+            value = response['value']
+        if isinstance(value, str):
+            raise exception_class(value)
+        if message == "" and 'message' in value:
+            message = value['message']
+    
+        screen = None  # type: ignore[assignment]
+        if 'screen' in value:
+            screen = value['screen']
+    
+        stacktrace = None
+        st_value = value.get('stackTrace') or value.get('stacktrace')
+        if st_value:
+            if isinstance(st_value, str):
+                stacktrace = st_value.split('\n')
+            else:
+                stacktrace = []
+                try:
+                    for frame in st_value:
+                        line = frame.get("lineNumber", "")
+                        file = frame.get("fileName", "<anonymous>")
+                        if line:
+                            file = f"{file}:{line}"
+                        meth = frame.get('methodName', '<anonymous>')
+                        if 'className' in frame:
+                            meth = "{}.{}".format(frame['className'], meth)
+                        msg = "    at %s (%s)"
+                        msg = msg % (meth, file)
+                        stacktrace.append(msg)
+                except TypeError:
+                    pass
+        if exception_class == UnexpectedAlertPresentException:
+            alert_text = None
+            if 'data' in value:
+                alert_text = value['data'].get('text')
+            elif 'alert' in value:
+                alert_text = value['alert'].get('text')
+            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button id="submit" type="button" class="btn btn-primary">...</button> is not clickable at point (1019, 718). Other element would receive the click: <iframe frameborder="0" src="https://ee8252bca23e506ec39b8c286d14c8e6.safeframe.googlesyndication.com/safeframe/1-0-40/html/container.html" id="google_ads_iframe_/21849154601,22343295815/Ad.Plus-Anchor_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="728" height="90" data-is-safeframe="true" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="attribution-reporting" aria-label="Advertisement" tabindex="0" data-google-container-id="1" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe>
+E         (Session info: chrome=127.0.6533.120)
+E       Stacktrace:
+E       0   chromedriver                        0x00000001007ba8b8 chromedriver + 5179576
+E       1   chromedriver                        0x00000001007b22ea chromedriver + 5145322
+E       2   chromedriver                        0x00000001003292b0 chromedriver + 389808
+E       3   chromedriver                        0x000000010037c096 chromedriver + 729238
+E       4   chromedriver                        0x0000000100379f88 chromedriver + 720776
+E       5   chromedriver                        0x0000000100377a57 chromedriver + 711255
+E       6   chromedriver                        0x0000000100376902 chromedriver + 706818
+E       7   chromedriver                        0x000000010036a496 chromedriver + 656534
+E       8   chromedriver                        0x00000001003977b2 chromedriver + 841650
+E       9   chromedriver                        0x0000000100369e58 chromedriver + 654936
+E       10  chromedriver                        0x000000010039796e chromedriver + 842094
+E       11  chromedriver                        0x00000001003b4b9b chromedriver + 961435
+E       12  chromedriver                        0x0000000100397553 chromedriver + 841043
+E       13  chromedriver                        0x00000001003687f6 chromedriver + 649206
+E       14  chromedriver                        0x000000010036905e chromedriver + 651358
+E       15  chromedriver                        0x000000010077db20 chromedriver + 4930336
+E       16  chromedriver                        0x0000000100782a36 chromedriver + 4950582
+E       17  chromedriver                        0x0000000100783105 chromedriver + 4952325
+E       18  chromedriver                        0x000000010075fee9 chromedriver + 4808425
+E       19  chromedriver                        0x00000001007833f9 chromedriver + 4953081
+E       20  chromedriver                        0x0000000100751844 chromedriver + 4749380
+E       21  chromedriver                        0x00000001007a25c8 chromedriver + 5080520
+E       22  chromedriver                        0x00000001007a2787 chromedriver + 5080967
+E       23  chromedriver                        0x00000001007b1ece chromedriver + 5144270
+E       24  libsystem_pthread.dylib             0x00007ff804b0b259 _pthread_start + 125
+E       25  libsystem_pthread.dylib             0x00007ff804b06c7b thread_start + 15
+
+/opt/miniconda3/lib/python3.12/site-packages/selenium/webdriver/remote/errorhandler.py:243: ElementClickInterceptedException
+- Generated html report: file:///Users/zulemaarteaga/Documents/GitRepos/upex-seleniumpy-demo2/tests/ToolsQA_ByZulemaArteaga/reports/2024-08-22.html -
+=========================== short test summary info ============================
+FAILED tests/ToolsQA_ByZulemaArteaga/test_GX3-3854_Dropdpwn.py::Test_GX3_3854_Dropdown_SelectMenu::test_multi_drop_down
+FAILED tests/ToolsQA_ByZulemaArteaga/test_GX3_4595_Textbox.py::Test_GX3_4595_ToolsQA_TextBox::test_fill_fullname
+============= 2 failed, 13 passed, 5 skipped in 1170.57s (0:19:30) =============
