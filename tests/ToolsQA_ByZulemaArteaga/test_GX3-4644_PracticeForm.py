@@ -17,6 +17,7 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
         yield
         web.quit()
 
+    @pytest.mark.skip(reason="This test only run NON headless, currently not running on Regression")
     def test_fill_out_form(self, precondition):
             '''TC01: Verify that after submiting the form with VALID data, a popup window is displayed confirming the submited information'''
             
@@ -24,7 +25,6 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
             with open('tests/ToolsQA_ByZulemaArteaga/data/GX3-4644_PracticeForm_data.csv', 'r') as file:
                 data = csv.DictReader(file)
             
-            try:
                 # Filling out the form with the data in file  
                 for row in data:
                     name = do.fill_input_byID_identifier("firstName", row['name'])
@@ -58,7 +58,7 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                         wait(2) # Waiting for the subject option to appear
                         subject_option = get.byXpath(f"//div[text()='{subject}']")
                         subject_option.click()
-                 
+                    
                     # Select Hobbies
                     hobbies = [hobby.strip() for hobby in row['hobbies'].strip('"').split(',')] # Splitting the hobbies from the string
                     for hobby in hobbies:
@@ -68,7 +68,6 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                             elif hobby == 'Music': get.contains("Music").click()
                         except NoSuchElementException: # If no hobbies
                             pass
-
                         
                     # Add Address
                     current_address = do.fill_input_byID_identifier('currentAddress', row['current_address'])
@@ -84,8 +83,6 @@ class Test_GX3_4644_ToolsQA_PracticeForm:
                     do.scroll_down_by_pixels(300)
                     get.byID("closeLargeModal").click() 
                     web.refresh()
-            except:
-                do.take_screenshot
-                
+            
 if __name__ == '__main__':
     pytest.main()
