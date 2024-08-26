@@ -18,7 +18,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from tests.pages.exampleLoginPage import LoginPage as exLoginPage
 from tests.utils.locators import Locators
-
+from selenium.common.exceptions import NoSuchElementException
 # from extension import *
 from tests.utils.actions import Actions_to_execute
 
